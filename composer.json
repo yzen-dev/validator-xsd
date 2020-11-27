@@ -1,0 +1,52 @@
+{
+  "name": "yzen.dev/validator-xsd",
+  "version": "0.0.1",
+  "description": "ValidatorXSD is a facade over DOMDocument that will allow you to more conveniently validate your XML file.",
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "license": "MIT",
+  "keywords": [ "php", "xml", "xsd", "shema", "validation", "validation xml", "localization" ],
+  "authors": [
+    {
+      "name": "Andey Iatsenko",
+      "email": "yzen.dev@gmail.com"
+    }
+  ],
+  "config": {
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "ValidatorXSD\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "require": {
+    "php": "^7.4"
+  },
+  "require-dev": {
+    "phpstan/phpstan": "^0.12.37",
+    "mockery/mockery": "^1.0",
+    "phpunit/phpunit": "^9.3",
+    "squizlabs/php_codesniffer": "*"
+  },
+  "support": {
+    "issues": "https://github.com/yzen-dev/validator-xsd/issues",
+    "source": "https://github.com/yzen-dev/validator-xsd"
+  },
+  "scripts": {
+    "phpunit": [
+      "./vendor/phpunit/phpunit/phpunit --configuration ./phpunit.xml"
+    ],
+    "phpstan": [
+      "./vendor/bin/phpstan analyse -c ./phpstan.neon src"
+    ],
+    "phpcs": [
+      "./vendor/bin/phpcs --standard=./phpcs.xml -n --no-cache"
+    ]
+  }
+}
