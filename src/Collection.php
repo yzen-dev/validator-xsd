@@ -52,9 +52,9 @@ class Collection implements Countable, IteratorAggregate
 
     /**
      * Convert collection to array
-     * @return Collection
+     * @return array
      */
-    public function toArray(): self
+    public function toArray(): array
     {
         $res = [];
         foreach ($this->items as $item) {
@@ -66,9 +66,9 @@ class Collection implements Countable, IteratorAggregate
                 $res [] = $item;
                 continue;
             }
-            $res [] = (array)$item;
+            $res [] = $item;
         }
-        return new self($res);
+        return $res;
     }
 
     /**

@@ -1,6 +1,6 @@
 {
   "name": "yzen.dev/validator-xsd",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "ValidatorXSD is a facade over DOMDocument that will allow you to more conveniently validate your XML file.",
   "minimum-stability": "dev",
   "prefer-stable": true,
