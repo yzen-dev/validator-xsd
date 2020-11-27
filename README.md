@@ -15,31 +15,30 @@ composer require yzen.dev/validator-xsd
 * The ability to localize validator errors
 
 ## :scroll: **Usage**
+Validate xml by schema:
 ```php
     $data = '<XML>...</XML>';
     $validator = ValidatorXSD::init($data)
                 ->loadSchema( './XSD/request.xsd')
                 ->setLocalization(CustomLocalizationXSD::class);
-
+    echo $validator->validate();
+```
+Get all error:
+```php
     if (!$validator->validate()) {
         foreach ($validator->getErrors() as $error) {
             var_dump($error);
         }
     }
 ```
+Pluck result and group by field:
 ```php
-object(ValidatorXSD\ErrorXSD)[2404]
-  private int 'level' => int 2
-  private int 'code' => int 1831
-  private int 'column' => int 0
-  private string 'message' => string 'Поле "Страна" меньше минимальной длины.' (length=71)
-  private string 'file' => string '/var/www/test/public/' (length=31)
-  private int 'line' => int 1
-  private string 'rule' => string 'minLength' (length=9)
-  private string 'ruleMessage' => string 'The value has a length of '0'; this underruns the allowed minimum length of '1'.' (length=80)
-  private string 'element' => string 'Страна' (length=12)
+    $errors = $validator->getErrors()
+                ->pluck(['element','message'])
+                ->groupBy('element');
 ```
 
+Create custom localization
 ```php
 class CustomLocalizationXSD implements LocalizationXSD
 {
