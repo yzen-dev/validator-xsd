@@ -4,19 +4,41 @@ declare(strict_types=1);
 
 namespace ValidatorXSD;
 
+use ValidatorXSD\Exceptions\LocalizationFailedImplement;
+
 /**
  * Trait TranslateTrait
  *
  * @package ValidatorXSD
  */
-trait TranslateTrait
+class Translator
 {
+    /** @var LocalizationXSD $ruleAdapter Adapter for localization */
+    private LocalizationXSD $ruleAdapter;
+
+    /**
+     * Translator constructor.
+     *
+     * @param string $ruleAdapter
+     *
+     * @throws LocalizationFailedImplement
+     */
+    public function __construct(string $ruleAdapter)
+    {
+        $class = new $ruleAdapter();
+        if ($class instanceof LocalizationXSD) {
+            $this->ruleAdapter = $class;
+        } else {
+            throw new LocalizationFailedImplement('Localization class not implements LocalizationXSD');
+        }
+    }
+    
     /**
      * Localization error
      *
      * @param ErrorXSD $error
      */
-    private function trans(ErrorXSD $error): void
+    public function trans(ErrorXSD $error): void
     {
         $newElement = $this->translateKey($error->getElement());
         $error->setElement($newElement);
@@ -30,7 +52,7 @@ trait TranslateTrait
      *
      * @param CollectionErrorXSD|array<ErrorXSD> $errors
      */
-    private function transAll($errors): void
+    public function transAll($errors): void
     {
         foreach ($errors as $error) {
             $this->trans($error);

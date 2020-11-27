@@ -15,8 +15,6 @@ use DOMDocument;
  */
 class ValidatorXSD
 {
-    use TranslateTrait;
-
     /** @var DOMDocument $xmlDom Represents an entire XML document; serves as the root of the document tree. */
     private DOMDocument $xmlDom;
 
@@ -26,8 +24,8 @@ class ValidatorXSD
     /** @var array<LibXMLError> $errors array of errors. */
     private array $errors = [];
 
-    /** @var LocalizationXSD|null $ruleAdapter Adapter for localization */
-    private ?LocalizationXSD $ruleAdapter;
+    /** @var Translator|null $translator Errors translator. */
+    private ?Translator $translator;
 
     /**
      * Load XML from a string
@@ -90,8 +88,8 @@ class ValidatorXSD
     public function getErrors(): CollectionErrorXSD
     {
         $collection = new CollectionErrorXSD($this->errors);
-        if ($this->ruleAdapter) {
-            $this->transAll($collection);
+        if ($this->translator) {
+            $this->translator->transAll($collection);
         }
         return $collection;
     }
@@ -104,12 +102,7 @@ class ValidatorXSD
      */
     public function setLocalization(string $ruleAdapter): self
     {
-        $class = new $ruleAdapter();
-        if ($class instanceof LocalizationXSD) {
-            $this->ruleAdapter = $class;
-            return $this;
-        }
-
-        throw new LocalizationFailedImplement('Localization class not implements LocalizationXSD');
+        $this->translator = new Translator($ruleAdapter);
+        return $this;
     }
 }
