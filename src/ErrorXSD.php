@@ -198,4 +198,22 @@ class ErrorXSD
         $this->element = $element;
     }
 
+    /**
+     * Convert object to array
+     * @return array<string, mixed>
+     */
+    public function toArray(): array
+    {
+        return [
+            'level' => $this->level,
+            'code' => $this->code,
+            'column' => $this->column,
+            'message' => $this->message,
+            'file' => $this->file,
+            'line' => $this->line,
+            'rule' => $this->rule,
+            'ruleMessage' => $this->ruleMessage,
+            'element' => $this->element,
+        ];
+    }
 }

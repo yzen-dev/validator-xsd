@@ -12,14 +12,10 @@ use IteratorAggregate;
 /**
  * Class CollectionErrorXSD
  *
- * @implements IteratorAggregate<ErrorXSD>
  * @package ValidatorXSD
  */
-class CollectionErrorXSD implements Countable, IteratorAggregate
+class CollectionErrorXSD extends Collection
 {
-    /** @var array<int, ErrorXSD> */
-    private array $items;
-    
     /**
      * CollectionErrorXSD constructor.
      *
@@ -27,9 +23,9 @@ class CollectionErrorXSD implements Countable, IteratorAggregate
      */
     public function __construct(array $errors)
     {
-        $this->items = $this->prepare($errors);
+        parent::__construct($this->prepare($errors));
     }
-    
+
     /**
      * Casting LibXMLError errors to ErrorXSD
      *
@@ -44,25 +40,5 @@ class CollectionErrorXSD implements Countable, IteratorAggregate
             $collection [] = ParseLibXMLError::parse($error);
         }
         return $collection;
-    }
-    
-    /**
-     * Count the number of items in the collection.
-     *
-     * @return int
-     */
-    public function count(): int
-    {
-        return count($this->items);
-    }
-    
-    /**
-     * Get an iterator for the items.
-     *
-     * @return ArrayIterator<int, ErrorXSD>
-     */
-    public function getIterator(): ArrayIterator
-    {
-        return new ArrayIterator($this->items);
     }
 }
