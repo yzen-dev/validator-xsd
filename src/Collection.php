@@ -51,15 +51,45 @@ class Collection implements Countable, IteratorAggregate
     }
 
     /**
-     * Get the values of a given key.
-     * @param array<string> $keys
+     * Convert collection to array
      * @return Collection
      */
-    public function pluck(array $keys): Collection
+    public function toArray(): self
     {
         $res = [];
         foreach ($this->items as $item) {
-            $res [] = array_intersect_key($item->toArray(), array_flip($keys));
+            if (is_object($item) && method_exists($item, 'toArray')) {
+                $res [] = $item->toArray();
+                continue;
+            }
+            if (is_array($item)) {
+                $res [] = $item;
+                continue;
+            }
+            $res [] = (array)$item;
+        }
+        return new self($res);
+    }
+
+    /**
+     * Get the values of a given key.
+     * @param string $key
+     * @return Collection
+     */
+    public function pluck(string $key): Collection
+    {
+        $res = [];
+        foreach ($this->items as $item) {
+            $value = null;
+            if (is_object($item) && method_exists($item, 'toArray')) {
+                $value = $item->toArray()[$key];
+            }
+            if (is_array($item)) {
+                $value = $item[$key];
+            }
+            if ($value !== null) {
+                $res[] = $value;
+            }
         }
         return new self($res);
     }
