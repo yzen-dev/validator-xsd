@@ -57,16 +57,12 @@ class Collection implements Countable, IteratorAggregate
     public function toArray(): array
     {
         $res = [];
-        foreach ($this->items as $item) {
-            if (is_object($item) && method_exists($item, 'toArray')) {
-                $res [] = $item->toArray();
+        foreach ($this->items as $key => $value) {
+            if (is_object($value) && method_exists($value, 'toArray')) {
+                $res [$key] = $value->toArray();
                 continue;
             }
-            if (is_array($item)) {
-                $res [] = $item;
-                continue;
-            }
-            $res [] = $item;
+            $res [$key] = $value;
         }
         return $res;
     }
