@@ -52,7 +52,7 @@ class Collection implements Countable, IteratorAggregate
 
     /**
      * Convert collection to array
-     * @return array
+     * @return array<mixed>
      */
     public function toArray(): array
     {
