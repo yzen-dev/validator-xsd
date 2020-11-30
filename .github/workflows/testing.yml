@@ -35,3 +35,6 @@ jobs:
       
     - name: Check codestyle
       run: composer run-script phpcs
+    
+    - name: PHPUnit
+      run: composer run-script phpunit
