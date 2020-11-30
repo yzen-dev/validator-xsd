@@ -33,11 +33,11 @@ class ParseLibXMLError
         preg_match('/^Element \'([a-zA-Z]*)\'/', $error->message, $element);
         $errorXSD->setElement($element[1]);
         
-        preg_match('/\[facet \'([a-zA-Z]*)\'\]/', $error->message, $rule);
-        $errorXSD->setRule($rule[1]);
+        preg_match('/\[facet \'([a-zA-Z]*)\'\]/', $error->message, $facet);
+        $errorXSD->setFacet($facet[1]);
         
-        preg_match('/\[facet \'[a-zA-Z]*\'\] ([\w\W]*)\n/', $error->message, $ruleMessage);
-        $errorXSD->setRuleMessage($ruleMessage[1]);
+        preg_match('/\[facet \'[a-zA-Z]*\'\] ([\w\W]*)\n/', $error->message, $facetMessage);
+        $errorXSD->setFacetMessage($facetMessage[1]);
         
         
         return $errorXSD;

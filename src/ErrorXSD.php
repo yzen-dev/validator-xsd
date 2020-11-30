@@ -27,11 +27,11 @@ class ErrorXSD
     /** @var int $line The line where the error occurred. */
     private int $line;
 
-    /** @var string $rule Rule on which the error occurred. */
-    private string $rule;
+    /** @var string $facet Facet on which the error occurred. */
+    private string $facet;
 
-    /** @var string $ruleMessage Error message (which rule returned). */
-    private string $ruleMessage;
+    /** @var string $facetMessage Error message (which facet returned). */
+    private string $facetMessage;
 
     /** @var string $element Name of the field that caused the error. */
     private string $element;
@@ -145,39 +145,39 @@ class ErrorXSD
     }
 
     /**
-     * Get rule on which the error occurred.
+     * Get facet on which the error occurred.
      * @return string
      */
-    public function getRule(): string
+    public function getFacet(): string
     {
-        return $this->rule;
+        return $this->facet;
     }
 
     /**
-     * Set rule on which the error occurred
-     * @param string $rule
+     * Set facet on which the error occurred
+     * @param string $facet
      */
-    public function setRule(string $rule): void
+    public function setFacet(string $facet): void
     {
-        $this->rule = $rule;
+        $this->facet = $facet;
     }
 
     /**
-     * Get the error message (which rule returned)
+     * Get the error message (which facet returned)
      * @return string
      */
-    public function getRuleMessage(): string
+    public function getFacetMessage(): string
     {
-        return $this->ruleMessage;
+        return $this->facetMessage;
     }
 
     /**
-     * Set the error message (which rule returned)
-     * @param string $ruleMessage
+     * Set the error message (which facet returned)
+     * @param string $facetMessage
      */
-    public function setRuleMessage(string $ruleMessage): void
+    public function setFacetMessage(string $facetMessage): void
     {
-        $this->ruleMessage = $ruleMessage;
+        $this->facetMessage = $facetMessage;
     }
 
     /**
@@ -211,8 +211,8 @@ class ErrorXSD
             'message' => $this->message,
             'file' => $this->file,
             'line' => $this->line,
-            'rule' => $this->rule,
-            'ruleMessage' => $this->ruleMessage,
+            'facet' => $this->facet,
+            'facetMessage' => $this->facetMessage,
             'element' => $this->element,
         ];
     }
