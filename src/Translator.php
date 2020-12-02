@@ -79,8 +79,8 @@ class Translator
      */
     public function translateMessage(ErrorXSD $errorXSD): string
     {
-        if (array_key_exists($errorXSD->getRule(), $this->ruleAdapter->messages())) {
-            $msg = $this->ruleAdapter->messages()[$errorXSD->getRule()];
+        if (array_key_exists($errorXSD->getFacet(), $this->ruleAdapter->messages())) {
+            $msg = $this->ruleAdapter->messages()[$errorXSD->getFacet()];
             return str_replace('${field}', $errorXSD->getElement(), $msg);
         }
         return $errorXSD->getMessage();
