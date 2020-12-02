@@ -38,6 +38,7 @@ class ParseLibXMLError
 
         preg_match('/\[facet \'[a-zA-Z]*\'\] ([\w\W]*)\n|(\'\'[\w\W]*)/', $error->message, $facetMessage);
         $facetMessage = array_values(array_filter($facetMessage));
+        $errorXSD->setFacetMessage($facetMessage[1]);
         
         return $errorXSD;
     }
