@@ -29,17 +29,23 @@ class ParseLibXMLError
         $errorXSD->setLevel($error->level);
         $errorXSD->setLine($error->line);
         $errorXSD->setMessage($error->message);
-        
+
         preg_match('/^Element \'([a-zA-Z]*)\'/', $error->message, $element);
         $errorXSD->setElement($element[1]);
-        
+
         preg_match('/\[facet \'([a-zA-Z]*)\'\]/', $error->message, $facet);
         $errorXSD->setFacet($facet[1] ?? 'empty');
 
         preg_match('/\[facet \'[a-zA-Z]*\'\] ([\w\W]*)\n|(\'\'[\w\W]*)/', $error->message, $facetMessage);
         $facetMessage = array_values(array_filter($facetMessage));
-        $errorXSD->setFacetMessage($facetMessage[1]);
-        
+        if (isset($facetMessage[1])) {
+            $errorXSD->setFacetMessage($facetMessage[1]);
+        } else {
+            preg_match('/^Element \'[a-zA-Z]*\': ([\w\W]*)/', $error->message, $facetMessage);
+            $errorXSD->setFacetMessage($facetMessage[1] ?? 'empty');
+        }
+
+
         return $errorXSD;
     }
 }
