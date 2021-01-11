@@ -1,4 +1,7 @@
 ## ValidatorXSD is a facade over DOMDocument. 
+![Packagist Version](https://img.shields.io/packagist/v/yzen.dev/validator-xsd?color=%23007ec6&style=plastic)
+![Packagist Downloads](https://img.shields.io/packagist/dm/yzen.dev/validator-xsd)
+![Packagist Downloads](https://img.shields.io/packagist/dt/yzen.dev/validator-xsd)
 
 ValidatorXSD is a DOMDocument facade that will allow you to more conveniently validate your XML file and also localize errors.
 
